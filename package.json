@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "gc": "node create-component.js",
+    "gp": "node create-page.js"
   },
   "dependencies": {
     "react": "19.1.0",
