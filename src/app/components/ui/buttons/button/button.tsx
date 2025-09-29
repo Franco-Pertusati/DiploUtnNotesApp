@@ -25,7 +25,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const styleMap: Record<string, string> = {
     text: "bg-transparent",
-    filled: "bg-text text-dark",
+    cta: "bg-text text-dark",
     border: "border border-light",
     secondary: "bg-neutral",
     danger: "bg-danger text-white"
@@ -35,7 +35,7 @@ const Button: React.FC<ButtonProps> = ({
     "inline-flex items-center justify-center gap-2 rounded-xl font-medium cursor-pointer";
 
   const getClasses = (): string => {
-    const variantClass = styleMap[variant] ?? "";
+    const variantClass = styleMap[variant] ?? "text";
     const padding = !showLabel || !label ? "p-1.5" : "px-3 py-1.5";
     return `${baseClasses} ${variantClass} ${padding} ${classList}`;
   };
