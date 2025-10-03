@@ -28,7 +28,7 @@ const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
   const isActive = (route: string) => pathname.includes(route);
 
   return (
-    <div className="w-56 h-full p-4 bg-dark flex flex-col border-r border-border">
+    <div className="w-56 h-full p-4 bg-neutral flex flex-col">
       <div className="grow flex flex-col gap-1">
         <div>
           <Link href="/profile" className="block">
