@@ -44,7 +44,7 @@ fs.mkdirSync(componentDir, { recursive: true });
 const tsxTemplate = `const ${componentName} = () => {
   return (
     <div className="p-4">
-      <span className="text-gray-700">${componentName} works!</span>
+      <span>${componentName} works!</span>
     </div>
   );
 };
