@@ -8,6 +8,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   showIcon?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit" | "reset";
+  isSidebar?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -19,6 +20,7 @@ const Button: React.FC<ButtonProps> = ({
   showIcon = true,
   onClick,
   type = "button",
+  isSidebar = false,
   ...rest
 }) => {
   const styleMap: Record<string, string> = {
@@ -26,7 +28,7 @@ const Button: React.FC<ButtonProps> = ({
     cta: "bg-text text-dark",
     ghost: "border border-muted  bg-transparent",
     secondary: "bg-light",
-    danger: "bg-danger text-white"
+    danger: "bg-danger text-white",
   };
 
   const baseClasses =
@@ -34,15 +36,17 @@ const Button: React.FC<ButtonProps> = ({
 
   const getClasses = (): string => {
     const variantClass = styleMap[variant] ?? "text";
-    const padding = !showLabel || !label ? "p-1.5" : "px-3 py-1.5";
+    const padding = isSidebar
+      ? "p-1.5"
+      : !showLabel || !label
+      ? "p-1.5"
+      : "px-3 py-1.5";
     return `${baseClasses} ${variantClass} ${padding} ${classList}`;
   };
 
   return (
     <button type={type} className={getClasses()} onClick={onClick} {...rest}>
-      {showIcon && icon && (
-        <i className="material-symbols-rounded">{icon}</i>
-      )}
+      {showIcon && icon && <i className="material-symbols-rounded">{icon}</i>}
       {showLabel && label && <span>{label}</span>}
     </button>
   );

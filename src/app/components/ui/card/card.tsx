@@ -17,7 +17,7 @@ const Card = ({ variant = "shadow", children, classList }: CardProps) => {
   const baseClasses: string = "rounded-lg";
 
   const getClasses = (): string => {
-    const variantClass = styleMap[variant] ?? "text";
+    const variantClass = styleMap[variant] ?? "shadow";
     return `${baseClasses} ${variantClass} ${classList}`;
   };
 

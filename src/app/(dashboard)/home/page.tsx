@@ -1,14 +1,22 @@
+import PageHeader from "@/app/components/page/page-header/page-header";
+import Button from "@/app/components/ui/buttons/button/button";
 import "@/app/globals.css";
 
 export default function HomePage() {
   return (
-    <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Inicio</h1>
-        <div className="bg-white rounded-lg shadow-sm border border-border p-6">
-          <p>Esta es la página de home</p>
-        </div>
-      </div>
+    <div className="px-6 py-3 mx-auto max-w-7xl w-full flex flex-col gap-4">
+      <PageHeader title="Inicio">
+        <Button label="Nuevo Album" variant="cta" icon="add" />
+      </PageHeader>
+      <section>
+        <h2 className="text-xl">Nota rapida</h2>
+      </section>
+      <section>
+        <h2 className="text-xl">Albumes Recientes</h2>
+      </section>
+      <section>
+        <h2 className="text-xl">Notas sueltas</h2>
+      </section>
     </div>
   );
 }
