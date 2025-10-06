@@ -6,14 +6,20 @@ export default function HomePage() {
   return (
     <div className="px-6 py-3 mx-auto max-w-7xl w-full flex flex-col gap-4">
       <PageHeader title="Inicio">
-        <Button label="Nuevo Album" variant="cta" icon="add" />
+        <Button icon="settings" />
       </PageHeader>
-      <section>
-        <h2 className="text-xl">Nota rapida</h2>
-      </section>
-      <section>
-        <h2 className="text-xl">Albumes Recientes</h2>
-      </section>
+      <div className="flex gap-3">
+        <section className="grow">
+          <h2 className="text-xl">Nota rapida</h2>
+          <div className="bg-light rounded-xl w-full h-64 p-3">
+            <span>Lo que escribas aqui se guardara con tus notas sueltas</span>
+          </div>
+        </section>
+        <section className="grow">
+          <h2 className="text-xl">Ultimo Album</h2>
+          <div className="bg-light rounded-xl w-full h-64"></div>
+        </section>
+      </div>
       <section>
         <h2 className="text-xl">Notas sueltas</h2>
       </section>

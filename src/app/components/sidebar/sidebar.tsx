@@ -21,7 +21,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
   const pathname = usePathname();
   const dialog = useDialog();
-  const [isOpen, setIsOpen] = useState(true); // ✅ Usa useState
+  const [isOpen, setIsOpen] = useState(true);
 
   const openSearch = () => {
     dialog.show(SearchDialog, { backdrop: true });
@@ -30,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
   const isActive = (route: string) => pathname.includes(route);
 
   const toggleSidebar = () => {
-    setIsOpen((prev) => !prev); // ✅ Actualiza el estado correctamente
+    setIsOpen((prev) => !prev);
   };
 
   return (
@@ -68,7 +68,9 @@ const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
             <Link
               href={button.route}
               key={index}
-              className={`flex items-center gap-2 w-full p-1.5 rounded ${isActive(button.route)? 'bg-text text-dark' : ''}`}
+              className={`flex items-center gap-2 w-full p-1.5 rounded ${
+                isActive(button.route) ? "bg-text text-dark" : ""
+              }`}
             >
               <i className="material-symbols-rounded">{button.icon}</i>
               {isOpen && <span>{button.label}</span>}
@@ -77,8 +79,10 @@ const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
         </div>
 
         <div className="flex flex-col">
-          {isOpen && <span className="font-bold px-3">Recientes</span>}
-          <Button label="Crear album" icon="add" showLabel={isOpen} />
+          <button className={`w-9 h-9 flex items-center gap-2 rounded-full ${isOpen? 'bg-transparent text-main-300  px-1.5' : 'bg-main-300 text-dark justify-center'}`}>
+            <i className="material-symbols-rounded">add</i>
+            {isOpen && <span>Crear album</span>}
+          </button>
         </div>
       </div>
 
