@@ -35,7 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
 
   return (
     <div
-      className={`h-full p-4 bg-neutral flex flex-col transition-all duration-100 ease-in text-nowrap ${
+      className={`h-full p-4 bg-neutral flex flex-col transition-all duration-100 ease-in text-nowrap pt-8 ${
         isOpen ? "w-60" : "w-18"
       }`}
     >
@@ -79,7 +79,7 @@ const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
         </div>
 
         <div className="flex flex-col">
-          <button className={`w-9 h-9 flex items-center gap-2 rounded-full ${isOpen? 'bg-transparent text-main-300  px-1.5' : 'bg-main-300 text-dark justify-center'}`}>
+          <button className={`w-9 h-9 flex items-center gap-2 rounded-full ${isOpen? 'bg-transparent text-main-300  px-1.5' : 'bg-main-300 text-dark justify-center hover:bg-main-200'}`}>
             <i className="material-symbols-rounded">add</i>
             {isOpen && <span>Crear album</span>}
           </button>

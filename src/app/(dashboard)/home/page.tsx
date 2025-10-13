@@ -4,25 +4,39 @@ import "@/app/globals.css";
 
 export default function HomePage() {
   return (
-    <div className="px-6 py-3 mx-auto max-w-7xl w-full flex flex-col gap-4">
-      <PageHeader title="Inicio">
-        <Button icon="settings" />
-      </PageHeader>
-      <div className="flex gap-3">
-        <section className="grow">
-          <h2 className="text-xl">Nota rapida</h2>
-          <div className="bg-light rounded-xl w-full h-64 p-3">
-            <span>Lo que escribas aqui se guardara con tus notas sueltas</span>
-          </div>
-        </section>
-        <section className="grow">
-          <h2 className="text-xl">Ultimo Album</h2>
-          <div className="bg-light rounded-xl w-full h-64"></div>
-        </section>
+    <div className="overflow-y-auto h-full">
+      <div className="mx-auto max-w-7xl w-full flex flex-col h-full py-3 px-6 gap-3">
+        <PageHeader title="Inicio">
+          <Button icon="upload" label="Upload file" variant="secondary" />
+        </PageHeader>
+        <div className="flex gap-3">
+          <section className="grow">
+            <div className="bg-light rounded-xl w-full h-64 p-3">
+              <span className="text-muted">
+                Nota rapida: Lo que escribas aqui se guardara con tus notas sin
+                clasificar
+              </span>
+            </div>
+          </section>
+          <section className="grow">
+            <div className="bg-main-300 rounded-xl w-full h-64 grid place-items-center">
+              <span className="text-dark font-bold text-2xl">Ultimo album</span>
+            </div>
+          </section>
+        </div>
+        <div className="grow flex gap-3">
+          <section className="grow">
+            <div className="bg-light rounded-xl w-full h-full">
+              
+            </div>
+          </section>
+          <section className="grow">
+            <div className="bg-light rounded-xl w-full h-full" style={{ height: '300vh' }}>
+              
+            </div>
+          </section>
+        </div>
       </div>
-      <section>
-        <h2 className="text-xl">Notas sueltas</h2>
-      </section>
     </div>
   );
 }
