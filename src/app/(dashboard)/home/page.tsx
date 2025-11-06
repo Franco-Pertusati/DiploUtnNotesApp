@@ -43,6 +43,6 @@ export default function HomePage() {
 
 // Opcional: Metadata para SEO
 export const metadata = {
-  title: "Home",
+  title: "Inicio",
   description: "Descripción de la página home",
 };

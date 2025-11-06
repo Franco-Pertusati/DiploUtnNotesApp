@@ -7,7 +7,8 @@ export default function FoldersPage() {
     <div className="overflow-y-auto h-full">
       <div className="mx-auto max-w-7xl w-full flex flex-col h-full py-3 px-6 gap-3">
         <PageHeader title="Carpetas">
-          <Button icon="upload" label="Upload file" variant="secondary" />
+          <Button icon="folder" label="Nueva carpeta" variant="secondary" />
+          <Button icon="note" label="Nuevo documento" variant="secondary" />
         </PageHeader>
       </div>
     </div>
@@ -16,6 +17,6 @@ export default function FoldersPage() {
 
 // Opcional: Metadata para SEO
 export const metadata = {
-  title: "Folders",
+  title: "Carpetas",
   description: "Descripción de la página folders",
 };
