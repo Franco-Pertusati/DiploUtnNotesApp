@@ -6,6 +6,7 @@ import Card from "@/app/components/ui/card/card";
 import CardFooter from "@/app/components/ui/card/card-footer/card-footer";
 import CardHeader from "@/app/components/ui/card/card-header/card-header";
 import "@/app/globals.css";
+import { authAPI } from "@/app/api/routes";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -50,20 +51,17 @@ export default function LoginPage() {
     setErrors((prev) => ({ ...prev, password: validatePassword(password) }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const emailError = validateEmail(email);
-    const passwordError = validatePassword(password);
-
-    setErrors({ email: emailError, password: passwordError });
-    setTouched({ email: true, password: true });
-
-    if (!emailError && !passwordError) {
-      console.log({
-        email,
-        password,
-      });
+    try {
+      const result = await authAPI.login(email, password);
+      if (result.success) {
+        console.log('Login exitoso:', result.user);
+      } else {
+        console.error('Error:', result.message);
+      }
+    } catch (error) {
+      console.error('Error de conexión:', error);
     }
   };
 

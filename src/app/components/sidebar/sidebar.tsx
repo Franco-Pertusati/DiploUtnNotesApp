@@ -7,6 +7,7 @@ import Button from "@/app/components/ui/buttons/button/button";
 import useDialog from "@/lib/dialogs/useDialog";
 import SearchDialog from "./dialogs/searchDialog/searchDialog";
 import { useState } from "react";
+import ProfileDialog from "../dialogs/profileDialog/profileDialog";
 
 interface SidebarButton {
   label: string;
@@ -26,6 +27,10 @@ const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
   const openSearch = () => {
     dialog.show(SearchDialog, { backdrop: true });
   };
+
+  const openProfile = () => {
+    dialog.show(ProfileDialog)
+  }
 
   const isActive = (route: string) => pathname.includes(route);
 
@@ -50,6 +55,7 @@ const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
             label="Mi perfil"
             icon="person"
             classList="w-full justify-start bg-light"
+            onClick={openProfile}
             showLabel={isOpen}
             isSidebar={true}
           />
