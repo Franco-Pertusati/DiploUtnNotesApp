@@ -7,13 +7,17 @@ export const authAPI = {
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include', // Envía y recibe cookies
+      credentials: 'include',
       body: JSON.stringify({ email, username, password }),
     });
     
-    // DEBUG: Ver si la cookie fue recibida
-    console.log('Register response headers:', response.headers.get('set-cookie'));
+    console.log('Register response status:', response.status);
     
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({ message: 'Registration failed' }));
+      throw new Error(err.message || 'Registration failed');
+    }
+
     return response.json();
   },
 
@@ -27,27 +31,32 @@ export const authAPI = {
       body: JSON.stringify({ email, password }),
     });
     
-    // DEBUG: Ver si la cookie fue recibida
-    console.log('Login response headers:', response.headers.get('set-cookie'));
-    
+    console.log('Login response status:', response.status);
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({ message: 'Login failed' }));
+      throw new Error(err.message || 'Login failed');
+    }
+
     return response.json();
   },
 
-  logout: async () => {
-    const response = await fetch(`${API_URL}/auth/logout`, {
-      method: 'POST',
-      credentials: 'include',
-    });
-    return response.json();
-  },
+  logout: async () => {},
 
   verify: async () => {
-    console.log('Verify - Enviando petición con cookies...');
     const response = await fetch(`${API_URL}/auth/verify`, {
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       credentials: 'include',
     });
-    console.log('Verify response status:', response.status);
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({ message: 'Verification failed' }));
+      throw new Error(err.message || 'Verification failed');
+    }
+
     return response.json();
   },
 };

@@ -10,6 +10,9 @@ export default function FoldersPage() {
           <Button icon="folder" label="Nueva carpeta" variant="secondary" />
           <Button icon="note" label="Nuevo documento" variant="secondary" />
         </PageHeader>
+        <div>
+          <Button icon="check" label="Probar verificacion" variant="cta" />
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import Button from "@/app/components/ui/buttons/button/button";
 import Card from "@/app/components/ui/card/card";
 import CardFooter from "@/app/components/ui/card/card-footer/card-footer";
@@ -9,6 +10,7 @@ import "@/app/globals.css";
 import { authAPI } from "@/app/api/routes";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: "", password: "" });
@@ -53,15 +55,25 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const emailError = validateEmail(email);
+    const passwordError = validatePassword(password);
+
+    setErrors({ email: emailError, password: passwordError });
+    setTouched({ email: true, password: true });
+
+    if (emailError || passwordError) {
+      return;
+    }
+
     try {
       const result = await authAPI.login(email, password);
-      if (result.success) {
-        console.log('Login exitoso:', result.user);
-      } else {
-        console.error('Error:', result.message);
-      }
+      console.log('Login exitoso:', result);
+      router.push('/home');
     } catch (error) {
-      console.error('Error de conexión:', error);
+      const message = error instanceof Error ? error.message : String(error);
+      console.error('Error:', message);
+      setErrors({ email: '', password: message });
     }
   };
 

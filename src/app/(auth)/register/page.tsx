@@ -22,7 +22,6 @@ export default function RegisterPage() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [serverError, setServerError] = useState("");
 
   const [touched, setTouched] = useState({
     email: false,
@@ -131,8 +130,6 @@ export default function RegisterPage() {
     e.preventDefault();
     if (loading) return;
 
-    setServerError("");
-
     const emailError = validateEmail(email);
     const passwordError = validatePassword(password);
     const confirmPasswordError = validateConfirmPassword(confirmPassword);
@@ -151,7 +148,6 @@ export default function RegisterPage() {
       confirmPassword: true,
     });
 
-    // Stop if any client-side validation error
     if (emailError || usernameError || passwordError || confirmPasswordError) {
       return;
     }
@@ -159,34 +155,13 @@ export default function RegisterPage() {
     setLoading(true);
     try {
       const res = await authAPI.register(email, username, password);
-
-      // If API returns field-specific errors, merge them into the errors state
-      if (res && typeof res === "object") {
-        if (res.errors && typeof res.errors === "object") {
-          // Map server field errors to our errors shape
-          setErrors((prev) => ({ ...prev, ...res.errors }));
-          return;
-        }
-
-        // Some APIs return a boolean flag or ok/success
-        if (res.ok === true || res.success === true) {
-          // Registration successful - redirect to login
-          router.push("/login");
-          return;
-        }
-
-        // If there's a message, show it
-        if (res.message) {
-          setServerError(String(res.message));
-          return;
-        }
-      }
-
-      // Fallback unknown response
-      setServerError("Error desconocido al registrar. Intenta nuevamente.");
+      console.log('Registro exitoso:', res);
+      // Registration successful - redirect to home
+      router.push("/home");
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : String(err);
-      setServerError(message || "Error de red. Intenta nuevamente.");
+      console.error('Error de registro:', message);
+      setErrors((prev) => ({ ...prev, email: message }));
     } finally {
       setLoading(false);
     }
@@ -357,11 +332,6 @@ export default function RegisterPage() {
                 autoComplete="new-password"
               />
             </div>
-            {serverError && (
-              <div className="text-sm text-danger" role="alert">
-                {serverError}
-              </div>
-            )}
             <Button label="Registrarse" variant="cta" type="submit" />
           </div>
         </form>
