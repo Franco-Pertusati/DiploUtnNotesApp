@@ -87,7 +87,7 @@ const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
         <div className="flex flex-col">
           <button className={`w-9 h-9 flex items-center gap-2 rounded-full ${isOpen? 'bg-transparent text-main-300  px-1.5' : 'bg-main-300 text-dark justify-center hover:bg-main-200'}`}>
             <i className="material-symbols-rounded">add</i>
-            {isOpen && <span>Crear album</span>}
+            {isOpen && <span>Crear Doc</span>}
           </button>
         </div>
       </div>

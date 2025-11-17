@@ -1,3 +1,4 @@
+import FoldersList from "@/app/components/folders/foldersList/foldersList";
 import PageHeader from "@/app/components/page/page-header/page-header";
 import Button from "@/app/components/ui/buttons/button/button";
 import "@/app/globals.css";
@@ -11,7 +12,7 @@ export default function FoldersPage() {
           <Button icon="note" label="Nuevo documento" variant="secondary" />
         </PageHeader>
         <div>
-          <Button icon="check" label="Probar verificacion" variant="cta" />
+          <FoldersList />
         </div>
       </div>
     </div>
