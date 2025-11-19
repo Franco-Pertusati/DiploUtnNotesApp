@@ -1,6 +1,5 @@
 const API_URL = 'http://localhost:3000';
 
-// Tipos
 export interface Folder {
   id: number;
   name: string;
@@ -41,7 +40,7 @@ export const foldersApi = {
     
     const response = await fetch(url, {
       method: 'GET',
-      credentials: 'include', // Importante para enviar cookies
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },

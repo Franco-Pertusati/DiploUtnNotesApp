@@ -1,9 +1,12 @@
+"use client";
+
 import FoldersList from "@/app/components/folders/foldersList/foldersList";
 import PageHeader from "@/app/components/page/page-header/page-header";
 import Button from "@/app/components/ui/buttons/button/button";
 import "@/app/globals.css";
 
 export default function FoldersPage() {
+
   return (
     <div className="overflow-y-auto h-full">
       <div className="mx-auto max-w-7xl w-full flex flex-col h-full py-3 px-6 gap-3">
@@ -12,15 +15,10 @@ export default function FoldersPage() {
           <Button icon="note" label="Nuevo documento" variant="secondary" />
         </PageHeader>
         <div>
+          <input type="text" placeholder="Sin titulo" className="p-2 border-border border rounded w-full" />
           <FoldersList />
         </div>
       </div>
     </div>
   );
 }
-
-// Opcional: Metadata para SEO
-export const metadata = {
-  title: "Carpetas",
-  description: "Descripción de la página folders",
-};
