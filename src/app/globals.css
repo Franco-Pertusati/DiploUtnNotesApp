@@ -61,3 +61,7 @@
 button {
   cursor: pointer;
 }
+
+input:focus {
+  outline: 1px var(--color-main-400) solid;
+}

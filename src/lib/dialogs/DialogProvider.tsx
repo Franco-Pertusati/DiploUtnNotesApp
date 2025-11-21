@@ -58,6 +58,8 @@ export default function DialogProvider({ children }: { children: React.ReactNode
         backdrop: options?.backdrop ?? true,
         autoClose: options?.autoClose ?? true,
         zIndex: options?.zIndex ?? 0,
+        width: options?.width,
+        height: options?.height,
       },
     };
     dispatch({ type: "ADD", payload: descriptor });

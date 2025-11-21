@@ -33,10 +33,16 @@ export default function DialogRenderer({
             {d.options.backdrop && (
               <div
                 onClick={() => d.options.autoClose && hide(d.id)}
-                className="absolute inset-0 bg-text/50 dark:bg-dark/50"
+                className="absolute inset-0 bg-text/50 dark:bg-dark/50 backdrop-blur-sm"
               />
             )}
-            <div className="relative bg-dark border border-t-highline border-b-bottomline border-x-border rounded-2xl p-4 min-w-3xs">
+            <div 
+              className="relative bg-dark border border-t-highline border-b-bottomline border-x-border rounded-2xl p-4 min-w-3xs"
+              style={{
+                width: d.options.width,
+                height: d.options.height,
+              }}
+            >
               {React.createElement(DialogComponent, props)}
             </div>
           </div>
