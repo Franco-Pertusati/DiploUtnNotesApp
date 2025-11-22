@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import FoldersList from "@/app/components/folders/foldersList/foldersList";
 import PageHeader from "@/app/components/page/page-header/page-header";
 import Button from "@/app/components/ui/buttons/button/button";
@@ -10,6 +11,13 @@ import { notesApi } from "@/app/api/notesApi";
 type CreatingType = "folder" | "note" | null;
 
 export default function FoldersPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  
+  const currentFolderId = searchParams.get("folder_id") 
+    ? parseInt(searchParams.get("folder_id")!) 
+    : null;
+
   const [isCreating, setIsCreating] = useState<CreatingType>(null);
   const [itemName, setItemName] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -37,10 +45,10 @@ export default function FoldersPage() {
 
     try {
       if (isCreating === "folder") {
-        await foldersApi.createFolder(itemName.trim(), null);
+        await foldersApi.createFolder(itemName.trim(), currentFolderId);
         console.log("Carpeta creada exitosamente");
       } else if (isCreating === "note") {
-        await notesApi.createNote(itemName.trim(), "", null);
+        await notesApi.createNote(itemName.trim(), "", currentFolderId);
         console.log("Nota creada exitosamente");
       }
 
@@ -92,9 +100,12 @@ export default function FoldersPage() {
           />
         </PageHeader>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 relative">
           {isCreating && (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+            <form 
+              onSubmit={handleSubmit} 
+              className="flex rounded-lg mb-2 z-10 absolute bg-neutral w-full"
+            >
               <input
                 ref={inputRef}
                 type="text"

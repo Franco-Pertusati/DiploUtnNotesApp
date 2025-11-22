@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
     ghost: "border border-muted  bg-transparent",
     secondary: "bg-light",
     danger: "bg-danger text-white",
-    outlined: "border-border"
+    outlined: "border border-border bg-transparent"
   };
 
   const baseClasses =

@@ -65,3 +65,7 @@ button {
 input:focus {
   outline: 1px var(--color-main-400) solid;
 }
+
+textarea:focus {
+  outline: 1px var(--color-text) solid;
+}
