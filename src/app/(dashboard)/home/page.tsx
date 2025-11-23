@@ -11,29 +11,30 @@ export default function HomePage() {
         </PageHeader>
         <div className="flex gap-3">
           <section className="grow">
-            <div className="bg-light rounded-xl w-full h-64 p-3">
-              <span className="text-muted">
-                Nota rapida: Lo que escribas aqui se guardara con tus notas sin
-                clasificar
-              </span>
-            </div>
+            <textarea
+              name=""
+              id=""
+              placeholder="Nota rapida: Lo que escribas aqui se guardara con tus notas sin clasificar"
+              className="border-border border rounded-xl p-2 grow resize-none bg-neutral w-full h-full"
+            ></textarea>
           </section>
-          <section className="grow">
-            <div className="bg-main-300 rounded-xl w-full h-64 grid place-items-center">
-              <span className="text-dark font-bold text-2xl">Ultimo album</span>
-            </div>
+          <section>
+            <button className="bg-main-300 rounded-xl min-w-64 h-64 grid place-items-center">
+              <span className="text-dark font-bold text-2xl">
+                Ultima carpeta
+              </span>
+            </button>
           </section>
         </div>
         <div className="grow flex gap-3">
           <section className="grow">
-            <div className="bg-light rounded-xl w-full h-full">
-              
-            </div>
+            <div className="bg-light rounded-xl w-full h-full"></div>
           </section>
           <section className="grow">
-            <div className="bg-light rounded-xl w-full h-full" style={{ height: '300vh' }}>
-              
-            </div>
+            <div
+              className="bg-light rounded-xl w-full h-full"
+              style={{ height: "300vh" }}
+            ></div>
           </section>
         </div>
       </div>
@@ -41,7 +42,6 @@ export default function HomePage() {
   );
 }
 
-// Opcional: Metadata para SEO
 export const metadata = {
   title: "Inicio",
   description: "Descripción de la página home",

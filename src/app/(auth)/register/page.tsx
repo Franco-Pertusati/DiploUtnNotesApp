@@ -156,7 +156,6 @@ export default function RegisterPage() {
     try {
       const res = await authAPI.register(email, username, password);
       console.log('Registro exitoso:', res);
-      // Registration successful - redirect to home
       router.push("/home");
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : String(err);
