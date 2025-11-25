@@ -1,3 +1,4 @@
+import NotesByEditDate from "@/app/components/notes/notesByEditDate/notesByEditDate";
 import PageHeader from "@/app/components/page/page-header/page-header";
 import Button from "@/app/components/ui/buttons/button/button";
 import "@/app/globals.css";
@@ -28,7 +29,7 @@ export default function HomePage() {
         </div>
         <div className="grow flex gap-3">
           <section className="grow">
-            <div className="bg-light rounded-xl w-full h-full"></div>
+              <NotesByEditDate />
           </section>
           <section className="grow">
             <div

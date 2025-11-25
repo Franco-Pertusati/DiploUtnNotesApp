@@ -1,5 +1,5 @@
 "use client";
-import { Note, notesApi } from "@/app/api/notesApi";
+import { Note, notesApi } from "@/app/api/contentRoutes";
 import Button from "../../ui/buttons/button/button";
 import { useEffect, useRef, useState } from "react";
 

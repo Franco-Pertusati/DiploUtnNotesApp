@@ -6,7 +6,10 @@ interface ConfirmActionDialogProps {
   onConfirm?: () => void;
 }
 
-const ConfirmActionDialog = ({ message, onConfirm }: ConfirmActionDialogProps) => {
+const ConfirmActionDialog = ({
+  message,
+  onConfirm,
+}: ConfirmActionDialogProps) => {
   const dialog = useDialog();
 
   function confirmAction() {
@@ -15,15 +18,16 @@ const ConfirmActionDialog = ({ message, onConfirm }: ConfirmActionDialogProps) =
   }
 
   return (
-    <div className="flex flex-col gap-2 max-w-2xs">
+    <div className="flex flex-col gap-4 max-w-2xs">
       <span className="text-lg">{message}</span>
-      <div className="flex justify-between w-full">
+      <div className="flex justify-between w-full gap-2">
+        <Button variant="danger" label="Confirmar" onClick={confirmAction} />
         <Button
+          classList="grow"
           variant="secondary"
           label="Cancelar"
           onClick={dialog.closeAll}
         />
-        <Button variant="cta" label="Confirmar" onClick={confirmAction} />
       </div>
     </div>
   );

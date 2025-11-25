@@ -1,6 +1,5 @@
 "use client";
-import { foldersApi } from "@/app/api/foldersApi";
-import { notesApi } from "@/app/api/notesApi";
+import { notesApi, foldersApi } from "@/app/api/contentRoutes";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import PageHeader from "../../page/page-header/page-header";

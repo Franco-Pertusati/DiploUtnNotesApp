@@ -1,6 +1,5 @@
 "use client";
-import { Folder, foldersApi } from "@/app/api/foldersApi";
-import { Note, notesApi } from "@/app/api/notesApi";
+import { Folder, foldersApi, Note, notesApi } from "@/app/api/contentRoutes";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import useDialog from "@/lib/dialogs/useDialog";
@@ -8,6 +7,8 @@ import EditNoteDialog from "../../dialogs/editNoteDialog/editNoteDialog";
 import ConfirmActionDialog from "../../dialogs/confirmActionDialog/confirmActionDialog";
 import Button from "../../ui/buttons/button/button";
 import Breadcrumb from "../../breadcrumb/breadcrumb";
+import FolderItem from "../folderItem/folderItem";
+import NoteItem from "../../notes/noteItem/noteItem";
 
 interface FoldersListProps {
   refresh?: number;
@@ -91,7 +92,7 @@ export default function FoldersList({ refresh = 0 }: FoldersListProps) {
   const navigateToBreadcrumb = (index: number) => {
     const targetFolder = folderPath[index];
     if (targetFolder.id === null) {
-      router.push("/folders"); // Ir a raíz
+      router.push("/folders");
     } else {
       router.push(`/folders?folder_id=${targetFolder.id}`);
     }
@@ -177,50 +178,23 @@ export default function FoldersList({ refresh = 0 }: FoldersListProps) {
         </div>
       ) : (
         <div className="flex flex-col">
-          {combined.map((item) => (
-            <div
-              key={`${item.type}-${item.id}`}
-              className="px-2 hover:bg-gray-50 cursor-pointer rounded-lg group hover:bg-neutral"
-            >
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex gap-2 items-center">
-                  <i className="material-symbols-rounded">
-                    {item.type === "folder" ? "folder" : "text_snippet"}
-                  </i>
-                  <button
-                    className="font-medium truncate text-left"
-                    onClick={() => {
-                      if (item.type === "folder") {
-                        navigateToFolder(item as Folder);
-                      } else {
-                        openNote(item as Note);
-                      }
-                    }}
-                  >
-                    {item.type === "folder" ? item.name : item.title}
-                  </button>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="flex gap-1 opacity-0 group-hover:opacity-100">
-                    <Button 
-                      icon="delete"
-                      onClick={(e) => {
-                        if (item.type === "folder") {
-                          deleteFolder(item as Folder, e);
-                        } else {
-                          deleteNote(item as Note, e);
-                        }
-                      }}
-                    />
-                    <Button icon="edit" />
-                  </div>
-                  <p className="text-gray-500 text-sm">
-                    {new Date(item.created_at).toLocaleDateString()}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
+          {combined.map((item) =>
+            item.type === "folder" ? (
+              <FolderItem
+                key={`folder-${item.id}`}
+                folder={item as Folder}
+                onOpen={navigateToFolder}
+                onDelete={deleteFolder}
+              />
+            ) : (
+              <NoteItem
+                key={`note-${item.id}`}
+                note={item as Note}
+                onOpen={openNote}
+                onDelete={deleteNote}
+              />
+            )
+          )}
         </div>
       )}
     </div>
