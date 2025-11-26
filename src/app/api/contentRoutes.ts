@@ -1,6 +1,5 @@
 const API_URL = 'http://localhost:3000';
 
-
 export interface Folder {
     id: number;
     name: string;
@@ -155,6 +154,23 @@ export const notesApi = {
 
         console.log(url)
         const response = await fetch(url, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            const error: ApiError = await response.json();
+            throw new Error(error.error?.message || 'Error al obtener notas');
+        }
+
+        return response.json();
+    },
+
+    getAllNotes: async () => {
+        const response = await fetch(`${API_URL}/notes/all`, {
             method: 'GET',
             credentials: 'include',
             headers: {

@@ -26,7 +26,6 @@ const Button: React.FC<ButtonProps> = ({
   const styleMap: Record<string, string> = {
     text: " bg-transparent",
     cta: "bg-text text-dark",
-    ghost: "border border-muted  bg-transparent",
     secondary: "bg-light",
     danger: "bg-danger text-white",
     outlined: "border border-border bg-transparent"

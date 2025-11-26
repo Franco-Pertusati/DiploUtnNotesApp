@@ -45,7 +45,6 @@ export default function FoldersList({ refresh = 0 }: FoldersListProps) {
         foldersApi.getFolders(currentFolderId),
         notesApi.getNotes(currentFolderId),
       ]);
-
       setFolders(foldersData);
       setNotes(notesData);
     } catch (err) {
@@ -125,22 +124,9 @@ export default function FoldersList({ refresh = 0 }: FoldersListProps) {
           await foldersApi.deleteFolder(folder.id);
           loadContent();
         } catch (err) {
-          alert(err instanceof Error ? err.message : "Error al eliminar carpeta");
-        }
-      },
-    });
-  };
-
-  const deleteNote = async (note: Note, e: React.MouseEvent) => {
-    e.stopPropagation();
-    dialog.show(ConfirmActionDialog, {
-      message: `¿Estás seguro de que deseas eliminar la nota "${note.title}"?`,
-      onConfirm: async () => {
-        try {
-          await notesApi.deleteNote(note.id);
-          loadContent();
-        } catch (err) {
-          alert(err instanceof Error ? err.message : "Error al eliminar nota");
+          alert(
+            err instanceof Error ? err.message : "Error al eliminar carpeta"
+          );
         }
       },
     });
@@ -173,7 +159,9 @@ export default function FoldersList({ refresh = 0 }: FoldersListProps) {
 
       {combined.length === 0 ? (
         <div className="flex flex-col gap-3 items-center my-24">
-          <i className="material-symbols-rounded text-xl p-3 bg-neutral rounded-xl">folder_open</i>
+          <i className="material-symbols-rounded text-xl p-3 bg-neutral rounded-xl">
+            folder_open
+          </i>
           <span>Carpeta vacia, prueba a crear tu primer contenido.</span>
         </div>
       ) : (
@@ -191,7 +179,7 @@ export default function FoldersList({ refresh = 0 }: FoldersListProps) {
                 key={`note-${item.id}`}
                 note={item as Note}
                 onOpen={openNote}
-                onDelete={deleteNote}
+                onUpdate={loadContent}
               />
             )
           )}

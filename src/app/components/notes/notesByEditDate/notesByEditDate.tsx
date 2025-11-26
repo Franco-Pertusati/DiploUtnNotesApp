@@ -11,7 +11,10 @@ interface NotesByEditDateProps {
   showActions?: boolean;
 }
 
-const NotesByEditDate = ({ limit, showActions = true }: NotesByEditDateProps) => {
+const NotesByEditDate = ({
+  limit,
+  showActions = true,
+}: NotesByEditDateProps) => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -26,9 +29,9 @@ const NotesByEditDate = ({ limit, showActions = true }: NotesByEditDateProps) =>
       setLoading(true);
       setError(null);
 
-      const allNotes = await notesApi.getNotes(undefined);
+      const allNotes = await notesApi.getAllNotes();
 
-      const sortedNotes = allNotes.sort((a, b) => {
+      const sortedNotes = allNotes.sort((a: Note, b: Note) => {
         const dateA = new Date(a.updated_at || a.created_at).getTime();
         const dateB = new Date(b.updated_at || b.created_at).getTime();
         return dateB - dateA;
@@ -48,21 +51,6 @@ const NotesByEditDate = ({ limit, showActions = true }: NotesByEditDateProps) =>
     dialog.show(EditNoteDialog, note, {
       width: "50%",
       height: "65%",
-    });
-  };
-
-  const deleteNote = async (note: Note, e: React.MouseEvent) => {
-    e.stopPropagation();
-    dialog.show(ConfirmActionDialog, {
-      message: `¿Estás seguro de que deseas eliminar la nota "${note.title}"?`,
-      onConfirm: async () => {
-        try {
-          await notesApi.deleteNote(note.id);
-          loadNotes();
-        } catch (err) {
-          alert(err instanceof Error ? err.message : "Error al eliminar nota");
-        }
-      },
     });
   };
 
@@ -94,8 +82,8 @@ const NotesByEditDate = ({ limit, showActions = true }: NotesByEditDateProps) =>
             key={note.id}
             note={note}
             onOpen={openNote}
-            onDelete={showActions ? deleteNote : undefined}
             showActions={showActions}
+            onUpdate={loadNotes}
           />
         ))}
       </div>
