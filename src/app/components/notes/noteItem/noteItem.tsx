@@ -93,7 +93,7 @@ export default function NoteItem({
   };
 
   return (
-    <div className="px-2 hover:bg-gray-50 cursor-pointer rounded-lg group hover:bg-neutral h-9">
+    <div className="px-2 hover:bg-gray-50 cursor-pointer rounded group hover:bg-neutral h-9">
       <div className="flex items-center justify-between gap-2 relative">
         <div className="flex gap-2 items-center flex-1 min-w-0">
           {isEditing ? (

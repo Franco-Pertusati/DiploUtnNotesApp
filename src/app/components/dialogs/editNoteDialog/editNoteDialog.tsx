@@ -1,12 +1,12 @@
 "use client";
 import { Note, notesApi } from "@/app/api/contentRoutes";
-import { flashcardsApi, CreateFlashcardData } from "@/app/api/contentRoutes"; // Asumiendo que lo agregaste aquí
+import { flashcardsApi } from "@/app/api/contentRoutes";
 import Button from "../../ui/buttons/button/button";
 import { useEffect, useRef, useState, KeyboardEvent } from "react";
 
 interface Flashcard {
   tempId: string;
-  id?: number; // ID real del backend
+  id?: number;
   question: string;
   answer: string;
 }

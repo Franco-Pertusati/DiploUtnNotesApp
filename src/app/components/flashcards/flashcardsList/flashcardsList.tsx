@@ -1,23 +1,12 @@
 "use client";
-import { Note, notesApi } from "@/app/api/contentRoutes";
-import { useState, useEffect } from "react";
-import useDialog from "@/lib/dialogs/useDialog";
-import EditNoteDialog from "../../dialogs/editNoteDialog/editNoteDialog";
-import NoteItem from "../noteItem/noteItem";
+import { flashcardsApi, Note, notesApi } from "@/app/api/contentRoutes";
+import { useEffect, useState } from "react";
+import FlashcardFolder from "../../notes/flashcardFolder/flashcardFolder";
 
-interface NotesByEditDateProps {
-  limit?: number;
-  showActions?: boolean;
-}
-
-const NotesByEditDate = ({
-  limit,
-  showActions = true,
-}: NotesByEditDateProps) => {
+const FlashcardsList = () => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const dialog = useDialog();
 
   useEffect(() => {
     loadNotes();
@@ -27,30 +16,35 @@ const NotesByEditDate = ({
     try {
       setLoading(true);
       setError(null);
-
       const allNotes = await notesApi.getAllNotes();
-
-      const sortedNotes = allNotes.sort((a: Note, b: Note) => {
+      
+      // Filtrar notas que tengan al menos 1 flashcard
+      const notesWithFlashcards = await Promise.all(
+        allNotes.map(async (note: Note) => {
+          try {
+            const flashcards = await flashcardsApi.getByNoteId(note.id);
+            return flashcards && flashcards.length > 0 ? note : null;
+          } catch {
+            return null;
+          }
+        })
+      );
+      
+      // Eliminar notas null y ordenar
+      const filteredNotes = notesWithFlashcards.filter((note): note is Note => note !== null);
+      
+      const sortedNotes = filteredNotes.sort((a: Note, b: Note) => {
         const dateA = new Date(a.updated_at || a.created_at).getTime();
         const dateB = new Date(b.updated_at || b.created_at).getTime();
         return dateB - dateA;
       });
-
-      const limitedNotes = limit ? sortedNotes.slice(0, limit) : sortedNotes;
-
-      setNotes(limitedNotes);
+      
+      setNotes(sortedNotes);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error desconocido");
     } finally {
       setLoading(false);
     }
-  };
-
-  const openNote = (note: Note) => {
-    dialog.show(EditNoteDialog, note, {
-      width: "50%",
-      height: "65%",
-    });
   };
 
   if (loading) {
@@ -67,26 +61,18 @@ const NotesByEditDate = ({
         <i className="material-symbols-rounded text-xl p-3 bg-neutral rounded-xl">
           description
         </i>
-        <span>No hay notas disponibles.</span>
+        <span>No hay notas con flashcards disponibles.</span>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex flex-col">
-        {notes.map((note) => (
-          <NoteItem
-            key={note.id}
-            note={note}
-            onOpen={openNote}
-            showActions={showActions}
-            onUpdate={loadNotes}
-          />
-        ))}
-      </div>
+    <div className="flex flex-col gap-2 w-full">
+      {notes.map((note) => (
+        <FlashcardFolder key={note.id} note={note} />
+      ))}
     </div>
   );
 };
 
-export default NotesByEditDate;
+export default FlashcardsList;

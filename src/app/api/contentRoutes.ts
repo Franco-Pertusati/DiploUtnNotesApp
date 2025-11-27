@@ -173,7 +173,6 @@ export const foldersApi = {
   },
 };
 
-
 export const notesApi = {
   getNotes: async (folderId: number | string | null = null): Promise<Note[]> => {
     const url = folderId
