@@ -7,7 +7,7 @@ import { useState, useRef, useEffect } from "react";
 interface NoteItemProps {
   note: Note;
   onOpen?: (note: Note) => void;
-  onUpdate?: () => void; // Callback para notificar cambios al padre
+  onUpdate?: () => void;
   showActions?: boolean;
 }
 

@@ -18,6 +18,7 @@
   --tw-duration: 100;
 
   --color-danger: #FA3333;
+  --color-danger-bg: #E05353;
   --color-warning: #fbbd08;
   --color-succes: #21ba45;
 
@@ -64,8 +65,4 @@ button {
 
 input:focus {
   outline: 1px var(--color-main-400) solid;
-}
-
-textarea:focus {
-  outline: 1px var(--color-text) solid;
 }

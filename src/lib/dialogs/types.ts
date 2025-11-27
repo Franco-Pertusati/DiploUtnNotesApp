@@ -20,4 +20,5 @@ export interface DialogDescriptor<P = unknown> {
     width?: string | number;
     height?: string | number;
   };
+  isClosing?: boolean
 }

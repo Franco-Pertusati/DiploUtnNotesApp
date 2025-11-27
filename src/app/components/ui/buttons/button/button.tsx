@@ -27,7 +27,7 @@ const Button: React.FC<ButtonProps> = ({
     text: " bg-transparent",
     cta: "bg-text text-dark",
     secondary: "bg-light",
-    danger: "bg-danger text-white",
+    danger: "bg-danger-bg border border-danger text-white",
     outlined: "border border-border bg-transparent"
   };
 

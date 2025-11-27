@@ -14,7 +14,11 @@ const QuickNote = () => {
 
     try {
       setIsSaving(true);
-      await notesApi.createNote("Nota rápida", content.trim(), null);
+      await notesApi.createNote(
+        `Nota rápida ${new Date().toLocaleDateString()}`,
+        content.trim(),
+        null
+      );
       setContent("");
       alert("Nota guardada exitosamente");
     } catch (error) {
@@ -27,13 +31,6 @@ const QuickNote = () => {
 
   return (
     <div className="relative h-full">
-      <Button
-        icon="save"
-        classList="absolute z-20 bottom-4 left-4"
-        variant="cta"
-        onClick={handleSave}
-        disabled={isSaving || !content.trim()}
-      />
       <textarea
         name=""
         id=""
@@ -43,6 +40,13 @@ const QuickNote = () => {
         className="border-border border rounded-xl p-2 grow resize-none bg-neutral w-full h-full"
         disabled={isSaving}
       ></textarea>
+      <Button
+        icon="save"
+        classList="absolute bottom-4 left-4"
+        variant="cta"
+        onClick={handleSave}
+        disabled={isSaving || !content.trim()}
+      />
     </div>
   );
 };

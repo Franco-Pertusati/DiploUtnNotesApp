@@ -20,7 +20,7 @@ export default function HomePage() {
             <section>
               <button className="bg-main-300 rounded-xl min-w-64 h-64 grid place-items-center">
                 <span className="text-dark font-bold text-2xl">
-                  Ultima carpeta
+                  Repasar flashcards
                 </span>
               </button>
             </section>
