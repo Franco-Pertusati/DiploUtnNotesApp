@@ -1,10 +1,13 @@
 import "@/app/globals.css";
 import FoldersContainer from "@/app/components/folders/foldersContainer/foldersContainer";
+import { Suspense } from "react";
 
 export default function FoldersPage() {
   return (
     <div className="overflow-y-auto h-full">
-      <FoldersContainer />
+      <Suspense>
+        <FoldersContainer />
+      </Suspense>
     </div>
   );
 }

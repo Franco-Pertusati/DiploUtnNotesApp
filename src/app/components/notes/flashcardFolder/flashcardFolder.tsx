@@ -8,8 +8,7 @@ interface FlashcardFolderProps {
 }
 
 const FlashcardFolder = ({ note }: FlashcardFolderProps) => {
-  const [cards, setCards] = useState([]);
-
+const [cards, setCards] = useState<Flashcard[]>([]);
   useEffect(() => {
     const fetchCards = async () => {
       const data: Flashcard[] = await flashcardsApi.getByNoteId(note.id);

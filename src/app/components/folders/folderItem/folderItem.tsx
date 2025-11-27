@@ -1,4 +1,4 @@
-import { Folder } from "@/app/api/foldersApi";
+import { Folder } from "@/app/api/contentRoutes";
 import Button from "../../ui/buttons/button/button";
 
 interface FolderItemProps {
