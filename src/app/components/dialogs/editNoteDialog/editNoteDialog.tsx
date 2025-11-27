@@ -1,10 +1,12 @@
 "use client";
 import { Note, notesApi } from "@/app/api/contentRoutes";
+import { flashcardsApi, CreateFlashcardData } from "@/app/api/contentRoutes"; // Asumiendo que lo agregaste aquí
 import Button from "../../ui/buttons/button/button";
 import { useEffect, useRef, useState, KeyboardEvent } from "react";
 
 interface Flashcard {
   tempId: string;
+  id?: number; // ID real del backend
   question: string;
   answer: string;
 }
@@ -35,7 +37,7 @@ const EditNoteDialog = (props: EditNoteDialogProps) => {
     return { question, answer };
   };
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = async (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key !== "Enter") return;
 
     const textarea = textareaRef.current;
@@ -63,11 +65,43 @@ const EditNoteDialog = (props: EditNoteDialogProps) => {
       const lineIndex = textBeforeCursor.split("\n").length - 1;
       lines.splice(lineIndex, 1);
       setEditedContent(lines.join("\n"));
+
+      try {
+        const createdFlashcard = await flashcardsApi.create({
+          note_id: id,
+          question: parsed.question,
+          answer: parsed.answer,
+        });
+
+        setFlashcards((prev) =>
+          prev.map((fc) =>
+            fc.tempId === tempId
+              ? { ...fc, id: createdFlashcard.id }
+              : fc
+          )
+        );
+      } catch (err) {
+        setFlashcards((prev) => prev.filter((fc) => fc.tempId !== tempId));
+        setError(err instanceof Error ? err.message : "Error al crear flashcard");
+        
+        const restoredLines = editedContent.split("\n");
+        restoredLines.splice(lineIndex, 0, currentLine);
+        setEditedContent(restoredLines.join("\n"));
+      }
     }
   };
 
-  const handleDeleteFlashcard = (flashcard: Flashcard) => {
+  const handleDeleteFlashcard = async (flashcard: Flashcard) => {
     setFlashcards((prev) => prev.filter((fc) => fc.tempId !== flashcard.tempId));
+
+    if (flashcard.id) {
+      try {
+        await flashcardsApi.delete(flashcard.id);
+      } catch (err) {
+        setFlashcards((prev) => [...prev, flashcard]);
+        setError(err instanceof Error ? err.message : "Error al eliminar flashcard");
+      }
+    }
   };
 
   const handleSave = async () => {
@@ -84,8 +118,26 @@ const EditNoteDialog = (props: EditNoteDialogProps) => {
   };
 
   useEffect(() => {
+    const loadFlashcards = async () => {
+      try {
+        const existingFlashcards = await flashcardsApi.getByNoteId(id);
+        setFlashcards(
+          existingFlashcards.map((fc) => ({
+            tempId: fc.id.toString(),
+            id: fc.id,
+            question: fc.question,
+            answer: fc.answer,
+          }))
+        );
+      } catch (err) {
+        console.error("Error loading flashcards:", err);
+        setError("Error al cargar flashcards");
+      }
+    };
+
+    loadFlashcards();
     textareaRef.current?.focus();
-  }, []);
+  }, [id]);
 
   return (
     <div className="flex flex-col gap-2 h-full">
