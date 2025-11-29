@@ -29,8 +29,8 @@ const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
   };
 
   const openProfile = () => {
-    dialog.show(ProfileDialog)
-  }
+    dialog.show(ProfileDialog);
+  };
 
   const isActive = (route: string) => pathname.includes(route);
 
@@ -85,7 +85,13 @@ const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
         </div>
 
         <div className="flex flex-col">
-          <button className={`w-9 h-9 flex items-center gap-2 rounded-full ${isOpen? 'bg-transparent text-main-300  px-1.5' : 'bg-main-300 text-dark justify-center hover:bg-main-200'}`}>
+          <button
+            className={`w-9 h-9 flex items-center gap-2 rounded-full ${
+              isOpen
+                ? "bg-transparent text-main-300  px-1.5"
+                : "bg-main-300 text-dark justify-center hover:bg-main-200"
+            }`}
+          >
             <i className="material-symbols-rounded">add</i>
             {isOpen && <span>Crear</span>}
           </button>
@@ -93,27 +99,20 @@ const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
       </div>
 
       <div className="flex flex-col">
-        <Button
-          label="Novedades"
-          icon="campaign"
-          classList="w-full justify-start bg-light"
-          showLabel={isOpen}
-          isSidebar={true}
-        />
-        <Button
-          label="Papelera"
-          icon="delete"
-          classList="w-full justify-start bg-light"
-          showLabel={isOpen}
-          isSidebar={true}
-        />
-        <Button
-          label="Configuración"
-          icon="settings"
-          classList="w-full justify-start bg-light"
-          showLabel={isOpen}
-          isSidebar={true}
-        />
+        <Link
+          href={"new-features"}
+          className="flex items-center gap-2 w-full p-1.5 rounded"
+        >
+          <i className="material-symbols-rounded">campaign</i>
+          {isOpen && <span>Novedades</span>}
+        </Link>
+        <Link
+          href={"trash"}
+          className="flex items-center gap-2 w-full p-1.5 rounded"
+        >
+          <i className="material-symbols-rounded">delete</i>
+          {isOpen && <span>Papelera</span>}
+        </Link>
       </div>
     </div>
   );
