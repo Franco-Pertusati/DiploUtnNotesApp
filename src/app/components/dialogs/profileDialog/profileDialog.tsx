@@ -16,9 +16,9 @@ const ProfileDialog = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const data = await authAPI.userInfo();
+        const data = await authAPI.userInfo(); 
         console.log("User info:", data);
-        setUser(data);
+        setUser(data.user);
       } catch (err) {
         console.error("Error obteniendo user info:", err);
       }
