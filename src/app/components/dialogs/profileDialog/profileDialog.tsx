@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { authAPI } from "@/app/api/routes";
+import { authAPI } from "@/app/api/authRoutes";
 import Button from "../../ui/buttons/button/button";
 import { useRouter } from "next/navigation";
 import useDialog from "@/lib/dialogs/useDialog";

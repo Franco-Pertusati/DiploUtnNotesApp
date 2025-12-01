@@ -7,7 +7,7 @@ import Card from "@/app/components/ui/card/card";
 import CardFooter from "@/app/components/ui/card/card-footer/card-footer";
 import CardHeader from "@/app/components/ui/card/card-header/card-header";
 import "@/app/globals.css";
-import { authAPI } from "@/app/api/routes";
+import { authAPI } from "@/app/api/authRoutes";
 
 export default function LoginPage() {
   const router = useRouter();
