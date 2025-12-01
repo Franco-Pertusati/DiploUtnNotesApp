@@ -1,4 +1,4 @@
-const API_URL = process.env.API_URL;
+const API_URL = 'https://diploutnapi-production.up.railway.app';
 
 export const authAPI = {
   register: async (email, username, password) => {
@@ -11,7 +11,7 @@ export const authAPI = {
       body: JSON.stringify({ email, username, password }),
     });
 
-    console.log("Register response status:", response.status);
+    console.log(response);
 
     if (!response.ok) {
       const err = await response

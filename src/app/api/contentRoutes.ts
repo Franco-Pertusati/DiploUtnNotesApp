@@ -1,4 +1,4 @@
-const API_URL = process.env.API_URL;
+const API_URL = "https://diploutnapi-production.up.railway.app";
 
 export interface Folder {
   id: number;
