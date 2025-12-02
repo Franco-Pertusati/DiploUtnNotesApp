@@ -3,7 +3,7 @@ import Sidebar from "../components/sidebar/sidebar";
 
 export default function Dashboard({ children }: { children: React.ReactNode }) {
   return (
-    <div className="h-screen w-full bg-neutral flex">
+    <div className="h-screen w-full bg-neutral flex relative">
       <Sidebar
         buttons={[
           { label: "Inicio", icon: "home", route: "home" },

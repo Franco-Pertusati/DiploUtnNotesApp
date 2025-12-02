@@ -40,7 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
 
   return (
     <div
-      className={`h-full p-4 bg-neutral flex flex-col transition-all duration-100 ease-in text-nowrap pt-8 ${
+      className={`h-full p-4 bg-neutral flex flex-col transition-all duration-100 ease-in text-nowrap pt-8 absolute z-10 border-r border-border ${
         isOpen ? "w-60" : "w-18"
       }`}
     >
