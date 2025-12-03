@@ -1,4 +1,4 @@
-const API_URL = process.env.API_URL;
+const API_URL = "/api";
 
 export interface Folder {
   id: number;
@@ -209,6 +209,7 @@ export const notesApi = {
       const error: ApiError = await response.json();
       throw new Error(error.error?.message || 'Error al obtener notas');
     }
+    console.log(`foldersApi llamando a: ${API_URL}`)
 
     return response.json();
   },
