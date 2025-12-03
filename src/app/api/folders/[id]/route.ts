@@ -4,12 +4,13 @@ const API_URL = process.env.API_URL;
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const cookieHeader = request.headers.get('cookie');
 
-    const response = await fetch(`${API_URL}/folders/${params.id}`, {
+    const response = await fetch(`${API_URL}/folders/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -35,13 +36,14 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const cookieHeader = request.headers.get('cookie');
     const body = await request.json();
 
-    const response = await fetch(`${API_URL}/folders/${params.id}`, {
+    const response = await fetch(`${API_URL}/folders/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -68,12 +70,13 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const cookieHeader = request.headers.get('cookie');
 
-    const response = await fetch(`${API_URL}/folders/${params.id}`, {
+    const response = await fetch(`${API_URL}/folders/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

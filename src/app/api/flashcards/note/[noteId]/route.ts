@@ -4,12 +4,13 @@ const API_URL = process.env.API_URL;
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { noteId: string } }
+  { params }: { params: Promise<{ noteId: string }> }
 ) {
   try {
+    const { noteId } = await params;
     const cookieHeader = request.headers.get('cookie');
 
-    const response = await fetch(`${API_URL}/flashcards/note/${params.noteId}`, {
+    const response = await fetch(`${API_URL}/flashcards/note/${noteId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
