@@ -2,6 +2,7 @@
 import { flashcardsApi, Note, notesApi } from "@/app/api/contentRoutes";
 import { useEffect, useState } from "react";
 import FlashcardFolder from "../../notes/flashcardFolder/flashcardFolder";
+import LoadingSpin from "../../loadingSpin/loadingSpin";
 
 const FlashcardsList = () => {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -18,7 +19,6 @@ const FlashcardsList = () => {
       setError(null);
       const allNotes = await notesApi.getAllNotes();
       
-      // Filtrar notas que tengan al menos 1 flashcard
       const notesWithFlashcards = await Promise.all(
         allNotes.map(async (note: Note) => {
           try {
@@ -30,7 +30,6 @@ const FlashcardsList = () => {
         })
       );
       
-      // Eliminar notas null y ordenar
       const filteredNotes = notesWithFlashcards.filter((note): note is Note => note !== null);
       
       const sortedNotes = filteredNotes.sort((a: Note, b: Note) => {
@@ -48,7 +47,7 @@ const FlashcardsList = () => {
   };
 
   if (loading) {
-    return <div className="text-center py-8">Cargando notas...</div>;
+    return <LoadingSpin />;
   }
 
   if (error) {

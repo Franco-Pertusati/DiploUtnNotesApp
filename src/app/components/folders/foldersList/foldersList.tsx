@@ -9,6 +9,7 @@ import Button from "../../ui/buttons/button/button";
 import Breadcrumb from "../../breadcrumb/breadcrumb";
 import FolderItem from "../folderItem/folderItem";
 import NoteItem from "../../notes/noteItem/noteItem";
+import LoadingSpin from "../../loadingSpin/loadingSpin";
 
 interface FoldersListProps {
   refresh?: number;
@@ -133,7 +134,7 @@ export default function FoldersList({ refresh = 0 }: FoldersListProps) {
   };
 
   if (loading) {
-    return <div className="text-center py-8">Cargando contenido...</div>;
+    return <LoadingSpin />;
   }
 
   if (error) {

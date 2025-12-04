@@ -40,11 +40,11 @@ const Sidebar: React.FC<SidebarProps> = ({ buttons }) => {
 
   return (
     <div
-      className={`h-full p-4 bg-neutral flex flex-col transition-all duration-100 ease-in text-nowrap pt-8 absolute z-10 border-r border-border ${
+      className={`h-full p-4 bg-neutral flex flex-col transition-all duration-100 ease-in text-nowrap pt-8 z-10 ${
         isOpen ? "w-60" : "w-18"
       }`}
     >
-      <div className="grow flex flex-col">
+      <div className="grow flex flex-col gap-4">
         <div className="flex gap-2 items-center mb-4">
           <Button icon="menu" onClick={toggleSidebar} isSidebar={true} />
           {isOpen && <span className="font-bold text-xl">NotesApp</span>}

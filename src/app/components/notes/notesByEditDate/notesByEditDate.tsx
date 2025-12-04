@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import useDialog from "@/lib/dialogs/useDialog";
 import EditNoteDialog from "../../dialogs/editNoteDialog/editNoteDialog";
 import NoteItem from "../noteItem/noteItem";
+import LoadingSpin from "../../loadingSpin/loadingSpin";
 
 interface NotesByEditDateProps {
   limit?: number;
@@ -54,7 +55,7 @@ const NotesByEditDate = ({
   };
 
   if (loading) {
-    return <div className="text-center py-8">Cargando notas...</div>;
+    return <LoadingSpin />;
   }
 
   if (error) {

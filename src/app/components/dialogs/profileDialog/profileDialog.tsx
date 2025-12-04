@@ -4,6 +4,7 @@ import { authAPI } from "@/app/api/authRoutes";
 import Button from "../../ui/buttons/button/button";
 import { useRouter } from "next/navigation";
 import useDialog from "@/lib/dialogs/useDialog";
+import LoadingSpin from "../../loadingSpin/loadingSpin";
 
 interface UserDto {
   username: string;
@@ -49,7 +50,7 @@ const ProfileDialog = () => {
       </div>
 
       <span className="text-center text-2xl">
-        Hola de nuevo {user?.username ?? "cargando..."}
+        Hola de nuevo {user?.username ?? <LoadingSpin/>}
       </span>
 
       <div className="flex flex-col gap-2">

@@ -1,4 +1,5 @@
 import { Note, notesApi } from '@/app/api/contentRoutes';
+import LoadingSpin from '@/app/components/loadingSpin/loadingSpin';
 import NoteItem from '@/app/components/notes/noteItem/noteItem';
 import { useState, useEffect } from 'react';
 
@@ -52,7 +53,7 @@ const SearchDialog = ({ onClose }: { onClose?: () => void }) => {
 
       <div className="w-full mt-4">
         {loading ? (
-          <div className="text-center text-gray-500 py-4">Cargando notas...</div>
+          <LoadingSpin />
         ) : error ? (
           <div className="text-center text-red-500 py-4">{error}</div>
         ) : filteredNotes.length === 0 ? (
