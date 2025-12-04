@@ -17,9 +17,9 @@ const ProfileDialog = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const data = await authAPI.userInfo(); 
+        const data = await authAPI.userInfo();
         console.log("User info:", data);
-        setUser(data.user);
+        setUser(data);
       } catch (err) {
         console.error("Error obteniendo user info:", err);
       }
@@ -29,14 +29,14 @@ const ProfileDialog = () => {
   }, []);
 
   const router = useRouter();
-  const dialog = useDialog()
+  const dialog = useDialog();
 
   const handleLogout = async () => {
     try {
       await authAPI.logout();
       router.push("/login");
       console.log("Cierre de sesión exitoso");
-      dialog.closeAll()
+      dialog.closeAll();
     } catch (err) {
       console.error("Error cerrando sesión:", err);
     }
@@ -46,11 +46,13 @@ const ProfileDialog = () => {
     <div className="flex flex-col gap-4 min-w-80">
       <span className="text-center text-xl">{user?.email}</span>
       <div className="mx-auto h-22 w-22 grid place-items-center rounded-full bg-main-300">
-        <span className="text-dark font-bold text-2xl">{user?.username[0].toUpperCase()}</span>
+        <span className="text-dark font-bold text-2xl">
+          {user?.username[0].toUpperCase()}
+        </span>
       </div>
 
       <span className="text-center text-2xl">
-        Hola de nuevo {user?.username ?? <LoadingSpin/>}
+        Hola de nuevo {user?.username ?? <LoadingSpin />}
       </span>
 
       <div className="flex flex-col gap-2">

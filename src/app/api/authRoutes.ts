@@ -21,11 +21,9 @@ interface LogoutResponse {
 }
 
 interface UserInfoResponse {
-  user: {
-    id: string;
-    email: string;
-    username: string;
-  };
+  id: string;
+  email: string;
+  username: string;
 }
 
 interface VerifyResponse {
@@ -55,16 +53,16 @@ export const authAPI = {
       credentials: "include",
       body: JSON.stringify({ email, username, password }),
     });
-    
+
     console.log(response);
-    
+
     if (!response.ok) {
       const err: ErrorResponse = await response
         .json()
         .catch(() => ({ message: "Registration failed" }));
       throw new Error(err.message || "Registration failed");
     }
-    
+
     return response.json();
   },
 
@@ -77,16 +75,16 @@ export const authAPI = {
       credentials: "include",
       body: JSON.stringify({ email, password }),
     });
-    
+
     console.log("Login response status:", response.status);
-    
+
     if (!response.ok) {
       const err: ErrorResponse = await response
         .json()
         .catch(() => ({ message: "Login failed" }));
       throw new Error(err.message || "Login failed");
     }
-    
+
     return response.json();
   },
 
@@ -98,14 +96,14 @@ export const authAPI = {
       },
       credentials: "include",
     });
-    
+
     if (!response.ok) {
       const err: ErrorResponse = await response
         .json()
         .catch(() => ({ message: "Logout failed" }));
       throw new Error(err.message || "Logout failed");
     }
-    
+
     return response.json();
   },
 
@@ -117,14 +115,14 @@ export const authAPI = {
       },
       credentials: "include",
     });
-    
+
     if (!response.ok) {
       const err: ErrorResponse = await response
         .json()
         .catch(() => ({ message: "Consult failed" }));
       throw new Error(err.message || "Consult failed");
     }
-    
+
     return response.json();
   },
 
@@ -136,14 +134,14 @@ export const authAPI = {
       },
       credentials: "include",
     });
-    
+
     if (!response.ok) {
       const err: ErrorResponse = await response
         .json()
         .catch(() => ({ message: "Verification failed" }));
       throw new Error(err.message || "Verification failed");
     }
-    
+
     return response.json();
   },
 };
